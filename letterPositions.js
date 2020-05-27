@@ -14,16 +14,29 @@ const assertArraysEqual = (actual, expected) => {
   );
 };
 
+// const letterPositions = function(sentence) {
+//   const results = {};
+//   const word = sentence.split(' ').join('').split('')
+//     word.forEach((letter, index) => {
+//       if (results[letter]) {
+//         results[letter].push(index)
+//       } else {
+//         results[letter] = [index]
+//     }
+//   })
+//   return results;
+// }
+
 const letterPositions = function(sentence) {
   const results = {};
   const word = sentence.split(' ').join('').split('')
-    word.forEach((letter, index) => {
-      if (results[letter]) {
-        results[letter].push(index)
+    for (let i = 0; i < word.length; i++) {
+      if (results[word[i]]) {
+        results[word[i]].push(i)
       } else {
-        results[letter] = [index]
+        results[word[i]] = [i]
     }
-  })
+  }
   return results;
 }
 
