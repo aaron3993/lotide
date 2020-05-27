@@ -1,4 +1,5 @@
 const eqArrays = (arr1, arr2) => {
+  if (arr1.length !== arr2.length) return false;
   for (let i = 0; i < arr1.length; i++) {
     if (arr1[i] !== arr2[i]) {
       return false;
@@ -14,29 +15,16 @@ const assertArraysEqual = (actual, expected) => {
   );
 };
 
-// const letterPositions = function(sentence) {
-//   const results = {};
-//   const word = sentence.split(' ').join('').split('')
-//     word.forEach((letter, index) => {
-//       if (results[letter]) {
-//         results[letter].push(index)
-//       } else {
-//         results[letter] = [index]
-//     }
-//   })
-//   return results;
-// }
-
 const letterPositions = function(sentence) {
   const results = {};
   const word = sentence.split(' ').join('').split('')
-    for (let i = 0; i < word.length; i++) {
-      if (results[word[i]]) {
-        results[word[i]].push(i)
+    word.forEach((letter, index) => {
+      if (results[letter]) {
+        results[letter].push(index)
       } else {
-        results[word[i]] = [i]
+        results[letter] = [index]
     }
-  }
+  })
   return results;
 }
 
