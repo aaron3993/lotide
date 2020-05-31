@@ -1,9 +1,9 @@
-const assertObjectsEqual = function(actual, expected) {
-  const inspect = require('util').inspect;
-  console.log(eqObjects(actual, expected) ?
-    `✅✅✅ Assertion Passed: ${inspect(actual)} === ${inspect(expected)}` :
-    `🛑🛑🛑 Assertion Failed: ${inspect(actual)} !== ${inspect(expected)}`
-  )
+const assertEqual = function(actual, expected) {
+  if (actual === expected) {
+    console.log(`✅✅✅ Assertion Passed: ${actual} === ${expected}`);
+  } else {
+    console.log(`🛑🛑🛑 Assertion Failed: ${actual} !== ${expected}`);
+  }
 };
 
 const eqArrays = (arr1, arr2) => {
@@ -28,17 +28,18 @@ const eqObjects = function(object1, object2) {
         return false
       };
     } else if (typeof object1[key] === 'object' && typeof object2[key] === 'object') {
-      return eqObjects(object1[key], object2[key])
-    } else {
-      if (object1[key] !== object2[key]) {
+        if (!eqObjects(object1[key], object2[key])) {
+          return false
+        }
+    } else if (object1[key] !== object2[key]) {
         return false;
       }
     }
-  }
   return true;
 };
 
-assertObjectsEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true) // => true
+// eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })
+assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true) // => true
 
-assertObjectsEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false) // => false
-assertObjectsEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false) // => false
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false) // => false
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false) // => false
