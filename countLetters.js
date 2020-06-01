@@ -17,3 +17,5 @@ const countLetters = word => {
   }
   return output
 }
+
+module.exports = countLetters

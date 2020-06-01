@@ -16,7 +16,7 @@ const eqArrays = (arr1, arr2) => {
   return true;
 };
 
-const eqObjects = function(object1, object2) {
+const recursiveEqObjects = function(object1, object2) {
   const object1Keys = Object.keys(object1);
   const object2Keys = Object.keys(object2);
   if (object1Keys.length !== object2Keys.length) {
@@ -28,7 +28,7 @@ const eqObjects = function(object1, object2) {
         return false
       };
     } else if (typeof object1[key] === 'object' && typeof object2[key] === 'object') {
-        if (!eqObjects(object1[key], object2[key])) {
+        if (!recursiveEqObjects(object1[key], object2[key])) {
           return false
         }
     } else if (object1[key] !== object2[key]) {
@@ -38,8 +38,9 @@ const eqObjects = function(object1, object2) {
   return true;
 };
 
-// eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })
-assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true) // => true
+assertEqual(recursiveEqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true) // => true
 
-assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false) // => false
-assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false) // => false
+assertEqual(recursiveEqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false) // => false
+assertEqual(recursiveEqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false) // => false
+
+module.exports = recursiveEqObjects

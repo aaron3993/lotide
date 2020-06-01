@@ -34,3 +34,5 @@ const eqObjects = (object1, object2) => {
 
 assertObjectsEqual({'a': 'g'}, {'a': 'b'})
 assertObjectsEqual({'a': ['g', 'g']}, {'a': ['g', 'g']})
+
+module.exports = assertObjectsEqual
