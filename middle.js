@@ -25,3 +25,5 @@ const middle = arr => {
   }
   console.log(output)
 }
+
+module.exports = middle
